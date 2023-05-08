@@ -2,6 +2,7 @@
     <div>
       <textarea v-model="text" placeholder="Enter your text here"></textarea>
       <button @click="onClick">Submit</button>
+      <p v-if="submitted">You entered: {{ text }}</p>
     </div>
   </template>
   
@@ -9,13 +10,14 @@
   export default {
     data() {
       return {
-        text: ""
+        text: "",
+        submitted: false
       };
     },
     methods: {
       onClick() {
         // Handle button click event
-        console.log("Button clicked!");
+        this.submitted = true;
       }
     }
   };
