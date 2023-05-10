@@ -44,3 +44,23 @@ async def create_message(message: Message):
 
     # Return the new message with the generated ID
     return {"id": new_id, "text": message.text}
+
+@app.get('/messages')
+async def get_all_messages():
+    cur.execute("SELECT * FROM mess")
+    rows = cur.fetchall()
+    return {"data": rows}
+
+@app.delete("/messages")
+async def delete_messages(ids: list[int]):
+    deleted = []
+    for id in ids:
+        for message in messages:
+            if message["id"] == id:
+                messages.remove(message)
+                deleted.append(id)
+                break
+        else:
+            raise HTTPException(status_code=404, detail=f"Message with id {id} not found")
+    return {"deleted": deleted}
+
