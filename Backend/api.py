@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 import psycopg2
 from fastapi.middleware.cors import CORSMiddleware
@@ -18,8 +19,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app = FastAPI()
-
 class Message(BaseModel):
     id: int
     text: str
@@ -33,8 +32,11 @@ conn = psycopg2.connect(
 
 cur = conn.cursor()
 
-@app.post("/messages")
+@app.post('/messages')
 async def create_message(message: Message):
-    cur.execute("INSERT INTO mess (id, text) VALUES (%s, %s)", (message.id, message.text))
-    conn.commit()
-    return {"message": "Message created"}
+    try:
+        cur.execute("INSERT INTO mess (id, text) VALUES (%s, %s)", (message.id, message.text))
+        conn.commit()
+        return JSONResponse(content={"message": "Message created"}, status_code=201)
+    except Exception as e:
+        return JSONResponse(content={"error": str(e)}, status_code=500)
