@@ -20,7 +20,6 @@ app.add_middleware(
 )
 
 class Message(BaseModel):
-    id: int
     text: str
 
 conn = psycopg2.connect(
@@ -34,9 +33,14 @@ cur = conn.cursor()
 
 @app.post('/messages')
 async def create_message(message: Message):
-    try:
-        cur.execute("INSERT INTO mess (id, text) VALUES (%s, %s)", (message.id, message.text))
-        conn.commit()
-        return JSONResponse(content={"message": "Message created"}, status_code=201)
-    except Exception as e:
-        return JSONResponse(content={"error": str(e)}, status_code=500)
+    # Generate a new ID by getting the maximum ID value from the database and adding 1
+    cur.execute("SELECT MAX(id) FROM mess")
+    max_id = cur.fetchone()[0]
+    new_id = max_id + 1 if max_id is not None else 1
+
+    # Insert the new message into the database
+    cur.execute("INSERT INTO mess (id, text) VALUES (%s, %s)", (new_id, message.text))
+    conn.commit()
+
+    # Return the new message with the generated ID
+    return {"id": new_id, "text": message.text}
