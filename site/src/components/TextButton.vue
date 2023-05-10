@@ -1,51 +1,29 @@
 <template>
-    <div>
-      <textarea v-model="text" placeholder="Enter your text here"></textarea>
-      <button @click="onClick">Submit</button>
-      <p v-if="submitted">You entered: {{ text }}</p>
-    </div>
-  </template>
-  
-  <script>
-  import axios from "axios";
+  <div>
+    <input v-model="id" type="number" placeholder="ID">
+    <input v-model="text" type="text" placeholder="Text">
+    <button @click="createMessage">Create message</button>
+  </div>
+</template>
 
-  export default {
-    data() {
-      return {
-        text: "",
-        submitted: false
-      };
-    },
-    methods: {
-        onClick() {
-            // Send message using Axios
-            axios.post("http://localhost:8000/messages", { text: this.text })
-            .then(response => {
-            console.log("Message sent:", response.data);
-            this.submitted = true;
-        })
-        .catch(error => {
-        console.error("Error sending message:", error);
-    });
-}
+<script>
+export default {
+  data() {
+    return {
+      id: null,
+      text: null
     }
-  };
-  </script>
-  
-  <style scoped>
-  textarea {
-    width: 100%;
-    height: 100px;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
+  },
+  methods: {
+    async createMessage() {
+      const response = await fetch("http://localhost:8000/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: this.id, text: this.text })
+      });
+      const data = await response.json();
+      console.log(data);
+    }
   }
-  button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  </style>
-  
+}
+</script>
