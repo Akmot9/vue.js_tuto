@@ -7,6 +7,8 @@
   </template>
   
   <script>
+  import axios from "axios";
+
   export default {
     data() {
       return {
@@ -15,10 +17,17 @@
       };
     },
     methods: {
-      onClick() {
-        // Handle button click event
-        this.submitted = true;
-      }
+        onClick() {
+            // Send message using Axios
+            axios.post("http://localhost:8000/messages", { text: this.text })
+            .then(response => {
+            console.log("Message sent:", response.data);
+            this.submitted = true;
+        })
+        .catch(error => {
+        console.error("Error sending message:", error);
+    });
+}
     }
   };
   </script>
