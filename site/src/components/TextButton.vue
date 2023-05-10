@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input v-model="id" type="number" placeholder="ID">
+    <input v-model="id" type="integer" placeholder="ID">
     <input v-model="text" type="text" placeholder="Text">
     <button @click="createMessage">Create message</button>
   </div>
