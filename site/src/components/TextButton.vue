@@ -48,7 +48,7 @@ export default {
     await this.getMessages(); // Get messages on initial load
     setInterval(async () => {
       await this.getMessages(); // Periodically get messages
-    }, 1000); // Check every 10 seconds
+    }, 100000); // Check every 10 seconds
   }
 }
 </script>
