@@ -95,7 +95,7 @@ export default {
     margin-right: 10px;
   }
   button {
-    background-color: #4CAF50;
+    background-color: #66C1BF;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -103,7 +103,7 @@ export default {
     cursor: pointer;
   }
   button:hover {
-    background-color: #3e8e41;
+    background-color: #66C1BF;
   }
   .delete-button {
     background-color: #f44336;
