@@ -61,3 +61,13 @@ async def delete_messages(id: int):
     cur.execute(f"DELETE FROM mess WHERE id = {id};")
     conn.commit()
     return {"id": id}
+
+class MessageUpdate(BaseModel):
+    id: int
+    text: str
+
+@app.put("/messages/{message_id}")
+async def update_message(message_id: int, message_update: MessageUpdate):
+    cur.execute("UPDATE mess SET text = %s WHERE id = %s", (message_update.text, message_id))
+    conn.commit()
+    return {"id": message_id, "text": message_update.text}

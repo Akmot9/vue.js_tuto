@@ -14,7 +14,9 @@
       <tbody>
         <tr v-for="message in messages" :key="message[0]">
           <td>{{ message[0] }}</td>
-          <td>{{ message[1] }}</td>
+          <td>
+            <input type="text" v-model="message[1]" @change="setChanges(index)">
+          </td>
           <td>
             <input type="checkbox" :value="message[0]" v-model="selectedMessages">
           </td>
@@ -22,6 +24,7 @@
       </tbody>
     </table>
     <button @click="deleteMessages">Delete selected messages</button>
+    <button @click="submitChanges">Save Changes</button>
   </div>
 </template>
 
