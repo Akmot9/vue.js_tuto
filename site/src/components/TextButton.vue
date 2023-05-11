@@ -71,3 +71,48 @@ export default {
   }
 }
 </script>
+
+<style>
+  table {
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+  }
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  th {
+    background-color: #dddddd;
+  }
+  input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #dddddd;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #3e8e41;
+  }
+  .delete-button {
+    background-color: #f44336;
+  }
+  .delete-button:hover {
+    background-color: #d32f2f;
+  }
+  .checkbox {
+    margin-right: 10px;
+  }
+</style>
+
