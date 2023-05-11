@@ -89,7 +89,7 @@ export default {
     font-size: 14px;
   }
   th, td {
-    border: 1px solid #dddddd;
+    border: 1px solid #35B6B4;
     text-align: left;
     padding: 8px;
   }
