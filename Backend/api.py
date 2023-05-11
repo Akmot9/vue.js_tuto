@@ -58,7 +58,6 @@ class LigneASupprimer(BaseModel):
 
 @app.delete("/messages")
 async def delete_messages(id: int):
-    cur.execute(f"DELETE FROM nom_de_la_table WHERE id = {id};")
+    cur.execute(f"DELETE FROM mess WHERE id = {id};")
     conn.commit()
     return {"id": id}
-
