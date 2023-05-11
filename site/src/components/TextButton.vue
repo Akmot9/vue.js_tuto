@@ -94,12 +94,12 @@ export default {
     padding: 8px;
   }
   th {
-    background-color: #dddddd;
+    background-color: #979394;
   }
   input[type="text"] {
     padding: 10px;
     font-size: 16px;
-    border: 2px solid #dddddd;
+    border: 2px solid #2A96A8;
     border-radius: 5px;
     margin-right: 10px;
   }
@@ -112,7 +112,7 @@ export default {
     cursor: pointer;
   }
   button:hover {
-    background-color: #66C1BF;
+    background-color: #092E3F;
   }
   .delete-button {
     background-color: #f44336;
